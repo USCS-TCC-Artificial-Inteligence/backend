@@ -37,7 +37,7 @@ O link para a documentação de API pode ser encontrado [aqui](https://www.notio
 - Através do painel PGAdmin que ja é incluido na instalação do PostgreSQL crie uma nova database chamada ```tcc``` ou outro nome que desejar.
 - Clone o repositório.
 - Na pasta recem criada, rode o comando no terminal ```yarn``` para instalar todos os pacotes.
-- Modifique o arquivo ```.env.example``` encontrado na raiz do diretório para ```.env```, e realize as alterações necessarias de seu cotéudo, mudando as váriaveis para as informações que você configurou durante o setup do PostgreSQL. *Verifique a estrutura de arquivos*.
+- Modifique o arquivo ```.env.example``` encontrado na raiz do diretório para ```.env```, e realize as alterações necessarias de seu contéudo, mudando as váriaveis para as informações que você configurou durante o setup do PostgreSQL. *Verifique a estrutura de arquivos*.
 - Rode o comando no terminal ```yarn start``` para executar os endpoints.
 
 # Considerações finais.
