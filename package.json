@@ -1,0 +1,27 @@
+{
+  "name": "express-api",
+  "version": "1.0.0",
+  "description": "API para o projeto do TCC.",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "babel-node": "babel-node --ignore='foo|bar|baz'",
+    "start": "nodemon --exec babel-node -- ./server.js  | pino-pretty -c"
+  },
+  "dependencies": {
+    "babel-plugin-inline-dotenv": "^1.6.0",
+    "body-parser": "^1.19.0",
+    "date-fns": "^2.21.3",
+    "express": "^4.17.1",
+    "pg-promise": "^10.10.2",
+    "pino": "^6.11.3",
+    "pino-pretty": "^4.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.3.0"
+  }
+}
