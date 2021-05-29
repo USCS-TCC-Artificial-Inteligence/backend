@@ -1,6 +1,6 @@
-import { updateProcessTrackingStatusResponse } from '../mocks/process';
 import { getTotalPages, parseError, parseSuccess } from '../config/result_parsers';
 import db from '../config/db';
+import { TRACKING_STATUS } from '../config/constants';
 
 export const getProcess = async (req, res) => {
   const body = req.body;
@@ -59,8 +59,47 @@ export const getProcess = async (req, res) => {
   }
 };
 
-export const updateProcessTrackingStatus = (req, res) => {
-  // Add Tag Code Here
+export const updateProcessTrackingStatus = async (req, res) => {
+  const body = req.body;
+  const params = req.params;
 
-  return res.status(200).json(updateProcessTrackingStatusResponse);
+  if (!body.status) {
+    return parseError(res, 400, 'Propriedade [status] não encontrada');
+  }
+  if (!params.process_name) {
+    return parseError(res, 400, 'Parâmetro [process_name] não encontrado');
+  }
+  if (!TRACKING_STATUS.includes(body.status)) {
+    return parseError(
+      res,
+      400,
+      `Status inválido, utilize uma das opções: ${TRACKING_STATUS.toString()}`
+    );
+  }
+
+  try {
+    await db.tx(async (transaction) => {
+      const selectedProcess = await transaction.oneOrNone(
+        'SELECT * from process where name = ${process_name};',
+        params
+      );
+
+      if (!selectedProcess) {
+        return parseError(res, 400, `Processo não encontrado.`);
+      }
+
+      return transaction.batch([
+        transaction.none('UPDATE process SET status = ${status} WHERE name = ${process_name};', {
+          status: body.status,
+          process_name: params.process_name,
+        }),
+      ]);
+    });
+
+    return parseSuccess(res, {
+      message: 'Status do processo alterado com sucesso.',
+    });
+  } catch (e) {
+    throw e;
+  }
 };
