@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS process (
 
 CREATE TABLE IF NOT EXISTS tags (
     name varchar(50) NOT NULL PRIMARY KEY,
-    description varchar(50)
+    description varchar(500)
 );
 
 CREATE TABLE IF NOT EXISTS process_tags (
@@ -22,13 +22,6 @@ CREATE TABLE IF NOT EXISTS process_tags_suggestions (
     process_name varchar(50) REFERENCES process(name) NOT NULL,
     count integer,
     PRIMARY KEY (tag_name, process_name)
-);
-
-CREATE TABLE IF NOT EXISTS tags_message (
-    id integer NOT NULL,
-    tag_name varchar(50) REFERENCES tags(name) NOT NULL,
-    message varchar(50),
-    PRIMARY KEY (id, tag_name)
 );
 
 CREATE TABLE IF NOT EXISTS process_snapshot (

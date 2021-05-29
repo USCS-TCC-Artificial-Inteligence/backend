@@ -1,13 +1,15 @@
 import db from './db';
-import fs from 'fs';
 import logger from './logger';
-
-const createAllTables = fs.readFileSync('./src/scripts/create_tables.sql', 'utf-8');
+import { createAllTablesScript } from '../scripts/map';
+import { insertDefaultTags } from './default_data';
 
 const initializeDB = async () => {
   try {
     logger.info('Initializing database, please wait...');
-    await db.none(createAllTables);
+    logger.info('Creating tables...');
+    await db.none(createAllTablesScript);
+    logger.info('Adding default tags...');
+    await insertDefaultTags();
     logger.info('Initialization complete.');
   } catch (err) {
     throw err;
