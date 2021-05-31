@@ -30,7 +30,7 @@ export const getProcess = async (req, res) => {
 
     if (body.filter) {
       countQuery =
-        'SELECT count(*), REGEXP_MATCHES(name, ${filter}) FROM process WHERE status = ${status};';
+        'SELECT count(*), REGEXP_MATCHES(name, ${filter}) FROM process WHERE status = ${status} GROUP BY name;';
       query =
         'SELECT *, REGEXP_MATCHES(name, ${filter}) FROM process LIMIT ${qty_per_page} OFFSET(${page} - 1) * ${qty_per_page};';
     } else if (body.process_names) {

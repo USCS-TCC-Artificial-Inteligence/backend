@@ -14,7 +14,5 @@ export const parseSuccess = (res, data) => {
 
 export const getTotalPages = async (query, qtyPerPage) => {
   const totalRegisters = await query;
-  console.log(totalRegisters.count);
-  console.log({ qtyPerPage });
   return Math.ceil(Number(totalRegisters.count) / Number(qtyPerPage));
 };

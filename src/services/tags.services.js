@@ -43,7 +43,7 @@ export const getTags = async (req, res) => {
     let countQuery;
 
     if (body.filter) {
-      countQuery = 'SELECT count(*), REGEXP_MATCHES(name, ${filter}) FROM tags;';
+      countQuery = 'SELECT count(*), REGEXP_MATCHES(name, ${filter}) FROM tags GROUP BY name;';
       query =
         'SELECT *, REGEXP_MATCHES(name, ${filter}) FROM tags LIMIT ${qty_per_page} OFFSET(${page} - 1) * ${qty_per_page};';
     } else if (body.tag_names) {
