@@ -1,4 +1,6 @@
 import pgp from 'pg-promise';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const db = pgp()({
   database: process.env.DB_NAME,
