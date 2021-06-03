@@ -5,9 +5,12 @@ import process from './src/routes/process';
 import process_tags from './src/routes/process_tags';
 import summary from './src/routes/summary';
 import consumptions from './src/routes/consumptions';
+import cors from 'cors';
 import { errorHandler, logErrors } from './src/middlewares/error_handlers';
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
